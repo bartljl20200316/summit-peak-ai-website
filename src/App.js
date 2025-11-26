@@ -425,13 +425,13 @@ function AIBusinessWebsite() {
             <div>
               <h4 className="text-white font-semibold mb-4">Connect</h4>
               <div className="flex space-x-4">
-                <a href="#" className="bg-purple-600/20 hover:bg-purple-600/40 p-2 rounded-lg transition">
+                <a href="https://github.com/summit-peak-ai" target="_blank" rel="noopener noreferrer" className="bg-purple-600/20 hover:bg-purple-600/40 p-2 rounded-lg transition" aria-label="GitHub">
                   <Github className="w-6 h-6 text-purple-400" />
                 </a>
-                <a href="#" className="bg-purple-600/20 hover:bg-purple-600/40 p-2 rounded-lg transition">
+                <a href="https://linkedin.com/company/summit-peak-ai" target="_blank" rel="noopener noreferrer" className="bg-purple-600/20 hover:bg-purple-600/40 p-2 rounded-lg transition" aria-label="LinkedIn">
                   <Linkedin className="w-6 h-6 text-purple-400" />
                 </a>
-                <a href="#" className="bg-purple-600/20 hover:bg-purple-600/40 p-2 rounded-lg transition">
+                <a href="https://twitter.com/summit-peak-ai" target="_blank" rel="noopener noreferrer" className="bg-purple-600/20 hover:bg-purple-600/40 p-2 rounded-lg transition" aria-label="Twitter">
                   <Twitter className="w-6 h-6 text-purple-400" />
                 </a>
               </div>
