@@ -4,10 +4,12 @@
   "description": "AI Outsourcing, Consulting and Training Business Website",
   "private": true,
   "dependencies": {
+    "dotenv": "^17.2.3",
     "lucide-react": "^0.263.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "resend": "^6.5.2"
   },
   "scripts": {
     "start": "react-scripts start",

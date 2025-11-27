@@ -10,29 +10,48 @@ function AIBusinessWebsite() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
     
-    // In a real application, you would send this to your backend
-    // For now, we'll simulate the submission
-    console.log('Form submitted:', formData);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitted(true);
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          service: 'consulting',
-          message: ''
-        });
-      }, 3000);
-    }, 500);
+    try {
+      // Send form data to Cloudflare Pages Function
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitted(true);
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({
+            name: '',
+            email: '',
+            company: '',
+            service: 'consulting',
+            message: ''
+          });
+        }, 5000);
+      } else {
+        setError(result.error || 'Failed to send message. Please try again.');
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setError('Network error. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -274,6 +293,11 @@ function AIBusinessWebsite() {
                 </div>
               ) : (
                 <div className="space-y-6">
+                  {error && (
+                    <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4">
+                      <p className="text-red-300 text-sm">{error}</p>
+                    </div>
+                  )}
                   <div>
                     <label className="block text-white font-semibold mb-2">Name *</label>
                     <input
@@ -343,10 +367,23 @@ function AIBusinessWebsite() {
                   
                   <button
                     onClick={handleSubmit}
-                    className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 rounded-lg transition transform hover:scale-105 flex items-center justify-center"
+                    disabled={loading}
+                    className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-800 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-lg transition transform hover:scale-105 disabled:transform-none flex items-center justify-center"
                   >
-                    Send Request
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Request
+                        <ArrowRight className="ml-2 w-5 h-5" />
+                      </>
+                    )}
                   </button>
                 </div>
               )}
