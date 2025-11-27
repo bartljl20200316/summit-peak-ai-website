@@ -264,7 +264,7 @@ function AIBusinessWebsite() {
                   <Mail className="w-6 h-6 text-purple-400 mr-4 mt-1" />
                   <div>
                     <h4 className="text-white font-semibold mb-1">Email</h4>
-                    <p className="text-gray-400">contact@summitpeak.ai</p>
+                    <p className="text-gray-400">ljl.swun@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start">
