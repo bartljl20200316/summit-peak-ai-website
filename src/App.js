@@ -278,6 +278,7 @@ function AIBusinessWebsite() {
                   <MapPin className="w-6 h-6 text-purple-400 mr-4 mt-1" />
                   <div>
                     <h4 className="text-white font-semibold mb-1">Office</h4>
+                    <p className="text-gray-400">123 AI Street, Tech Valley, CA 94025</p>
                     <p className="text-gray-400">13506 Ringold Cv Austin, TX 78717</p>
                   </div>
                 </div>
